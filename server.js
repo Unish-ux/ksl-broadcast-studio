@@ -131,8 +131,13 @@ app.post("/api/ball", (req, res) => {
   // Strike changes for odd runs completed / scored. A no-ball's bat runs count;
   // wide/byes/leg-byes use the entered completed-run value.
   const strikeRuns = type === "WD" || type === "B" || type === "LB" ? n : batterRuns;
-  if (strikeRuns % 2 === 1) swapStrike();
-  if (legal && state.score.balls > 0 && state.score.balls % 6 === 0) swapStrike();
+  // On the final legal ball of an over, an odd run has already changed ends.
+  // Only even-run deliveries need the end-of-over strike change.
+  if (legal && state.score.balls > 0 && state.score.balls % 6 === 0) {
+    if (strikeRuns % 2 === 0) swapStrike();
+  } else if (strikeRuns % 2 === 1) {
+    swapStrike();
+  }
 
   record(before, { type, runs: n, total, extras, legal, wicket, dismissalType, batterIndex, bowlerName: state.bowler.name });
   broadcast(); res.json(state);
