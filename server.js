@@ -16,7 +16,7 @@ fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 const STATE_FILE = path.join(DATA_DIR, "match.json");
 
 const initialState = {
-  match: { tournament: "KOSHI SUPER LEAGUE", matchTitle: "MATCH 1", ground: "Cricket Ground", location: "NEPAL", tossWinner: "", tossDecision: "BAT", innings: 1 },
+  match: { tournament: "KOSHI SUPER LEAGUE", matchTitle: "MATCH 1", ground: "Cricket Ground", location: "NEPAL", tossWinner: "", tossDecision: "BAT", innings: 1, overs: 20, date: "" },
   teams: { batting: "KG", bowling: "RHINOS", battingFull: "KTM GORKHAS", bowlingFull: "CHITWAN RHINOS" },
   score: { runs: 0, wickets: 0, balls: 0, extras: 0, history: [] },
   batters: [
@@ -24,7 +24,7 @@ const initialState = {
     { name: "Batter 2", runs: 0, balls: 0, fours: 0, sixes: 0, out: false }
   ],
   striker: 0,
-  bowler: { name: "Bowler 1", runs: 0, wickets: 0, balls: 0 },
+  bowler: { name: "Bowler 1", runs: 0, wickets: 0, balls: 0 },\n  playingXI: { batting: [], bowling: [] },
   graphic: { background: "", show: true }
 };
 
@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/health", (_req, res) => res.json({ ok: true }));
 app.get("/api/state", (_req, res) => res.json(state));
 app.post("/api/settings", (req, res) => {
-  const allowed = ["match", "teams", "batters", "bowler", "striker", "graphic"];
+  const allowed = ["match", "teams", "batters", "bowler", "striker", "graphic", "playingXI"];
   for (const key of allowed) if (req.body[key] !== undefined) state[key] = req.body[key];
   broadcast(); res.json(state);
 });
