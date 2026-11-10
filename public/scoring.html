@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KSL Broadcast Studio</title><link rel="stylesheet" href="/style.css"></head>
+<body><header><div class="brand">KSL <span>BROADCAST STUDIO</span></div><div id="connection">Connecting…</div></header>
+<main class="layout">
+<section class="panel score"><h2>LIVE SCORING</h2><div class="scoreline"><span id="batTeam">KG</span><strong id="total">0/0</strong><small id="overs">0.0 OVERS</small></div>
+<div class="players"><div><label>STRIKER</label><input id="batter0" value="Batter 1"><span id="bat0stats">0 (0)</span></div><div><label>NON-STRIKER</label><input id="batter1" value="Batter 2"><span id="bat1stats">0 (0)</span></div></div>
+<div class="bowler"><label>BOWLER</label><input id="bowler" value="Bowler 1"><span id="bowlstats">0/0 · 0.0</span></div>
+<h3>RUNS</h3><div class="buttons runs"><button data-run="0">0</button><button data-run="1">1</button><button data-run="2">2</button><button data-run="3">3</button><button data-run="4" class="four">4</button><button data-run="6" class="six">6</button></div>
+<h3>EXTRAS & WICKET</h3><div class="buttons"><button data-type="WD">WIDE</button><button data-type="NB">NO BALL</button><button data-type="B">BYE</button><button data-type="LB">LEG BYE</button><button data-type="W" class="out">WICKET</button></div>
+<div class="actions"><button id="undo">UNDO LAST BALL</button><button id="saveNames">SAVE PLAYER NAMES</button></div><div id="message"></div></section>
+<section class="panel"><h2>MATCH & GRAPHICS SETUP</h2><div class="formgrid">
+<label>Tournament<input id="tournament" value="KOSHI SUPER LEAGUE"></label><label>Match title<input id="matchTitle" value="MATCH 1"></label><label>Ground<input id="ground" value="Cricket Ground"></label><label>Location<input id="location" value="NEPAL"></label><label>Batting team short name<input id="batShort" value="KG"></label><label>Bowling team short name<input id="bowlShort" value="RHINOS"></label><label>Toss winner<input id="tossWinner"></label><label>Toss decision<select id="tossDecision"><option>BAT</option><option>BOWL</option></select></label></div>
+<label class="upload">Scoreboard PNG background<input type="file" id="graphic" accept="image/png"></label><p><a href="/overlay" target="_blank">Open OBS overlay ↗</a></p><p class="hint">OBS Browser Source URL: <code id="overlayUrl"></code></p></section>
+</main><script src="/socket.io/socket.io.js"></script><script src="/app.js"></script></body></html>
